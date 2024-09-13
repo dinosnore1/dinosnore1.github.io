@@ -2,22 +2,11 @@
 <html>
   <head>
     <script>
-      /**
-       * SCF_GATEWAY：SCF 云函数网关地址
-       * SITE_NAME：站点名称
-       */
       window.GLOBAL_CONFIG = {
         SCF_GATEWAY: "https://dl.dinosnore.workers.dev",
-        SITE_NAME: "FODI",
+        SITE_NAME: "OneDrive",
         IS_CF: true,
       };
-      // if (window.GLOBAL_CONFIG.SCF_GATEWAY.indexOf("workers") === -1) {
-      //   window.GLOBAL_CONFIG.SCF_GATEWAY += "/fodi/";
-      //   window.GLOBAL_CONFIG.IS_CF = false;
-      // }
-      // if (location.protocol === 'http:') {
-      //     location.href = location.href.replace(/http/, 'https');
-      // }
     </script>
     <meta charset="utf-8" />
     <meta
@@ -177,7 +166,7 @@
       }
 
       pre * {
-        font-family: Courier New;
+        font-family: Roboto;
       }
 
       .preview {
@@ -257,7 +246,7 @@
 
       * {
         box-sizing: border-box;
-        font-family: serif;
+        font-family: Roboto;
       }
 
       .markdown-body {
@@ -910,14 +899,14 @@
         const buttonParent = button.parentElement;
         const buttonClone = button.cloneNode(true);
         buttonParent.replaceChild(buttonClone, button);
-        input.placeholder = "请输入密码";
+        input.placeholder = "Password";
         buttonClone.addEventListener("click", (event) => {
           const passwd = input.value;
           if (!input.value) {
             return;
           }
           input.value = "";
-          input.placeholder = "正在验证..";
+          input.placeholder = "Verifying..";
           sendRequest(
             window.api.method,
             window.api.url,
@@ -926,7 +915,7 @@
             (data) => {
               const newFiles = JSON.parse(data);
               if (newFiles.encrypted) {
-                input.placeholder = "密码错误";
+                input.placeholder = "Wrong Password";
               } else {
                 window.fileCache.set(newFiles.parent, newFiles);
                 fetchFileList(newFiles.parent);
@@ -1150,7 +1139,7 @@
                 div.style.webkitTapHighlightColor = "rgba(0, 0, 0, 0)";
                 div.style.cursor = "pointer";
                 div.style.textAlign = "center";
-                div.innerHTML = "新窗口打开";
+                div.innerHTML = "New window opens";
                 div.addEventListener("click", () => window.open(officeOnline));
                 content.innerHTML = "";
                 content.appendChild(div);
@@ -1174,7 +1163,7 @@
                 pdfDiv.style.webkitTapHighlightColor = "rgba(0, 0, 0, 0)";
                 pdfDiv.style.cursor = "pointer";
                 pdfDiv.style.textAlign = "center";
-                pdfDiv.innerHTML = "新窗口打开";
+                pdfDiv.innerHTML = "New window opens";
                 pdfDiv.addEventListener("click", () => window.open(pdfOnline));
                 content.innerHTML = "";
                 content.appendChild(pdfDiv);
@@ -1236,7 +1225,7 @@
               default:
                 let textWrapper = document.createElement("div");
                 textWrapper.style.textAlign = "center";
-                textWrapper.innerHTML = "该文件不支持预览";
+                textWrapper.innerHTML = "Preview Not Supported";
                 content.innerHTML = "";
                 content.appendChild(textWrapper);
                 break;
@@ -1254,8 +1243,8 @@
                   window.api.url + path
                 );
                 const btn = document.querySelector(".btn.quote");
-                btn.innerHTML = "已复制";
-                setTimeout(() => (btn.innerHTML = "引用"), 250);
+                btn.innerHTML = "Copied";
+                setTimeout(() => (btn.innerHTML = "Quote"), 250);
               });
             document
               .querySelector(".btn.share")
@@ -1276,8 +1265,8 @@
                     encodeURI(sharePath())
                 );
                 const btn = document.querySelector(".btn.share");
-                btn.innerHTML = "已复制";
-                setTimeout(() => (btn.innerHTML = "分享"), 250);
+                btn.innerHTML = "Copied";
+                setTimeout(() => (btn.innerHTML = "Share"), 250);
               });
             switchRightDisplay("preview");
 
@@ -1654,16 +1643,16 @@
           <div class="preview">
             <div class="info">
               <div class="file-name"></div>
-              <div class="btn download">下载</div>
-              <div class="btn quote">引用</div>
-              <div class="btn share">分享</div>
+              <div class="btn download">Download</div>
+              <div class="btn quote">Quote</div>
+              <div class="btn share">Share</div>
             </div>
             <div class="content"></div>
           </div>
           <div class="password-wrapper">
             <div class="password">
               <input type="password" />
-              <button>提交</button>
+              <button>Submit</button>
             </div>
           </div>
         </div>
